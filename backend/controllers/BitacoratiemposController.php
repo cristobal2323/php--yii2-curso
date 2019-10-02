@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Proyectos;
-use backend\models\search\ProyectosSearch;
+use backend\models\Bitacoratiempos;
+use backend\models\search\BitacoratiemposSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ProyectosController implements the CRUD actions for Proyectos model.
+ * BitacoratiemposController implements the CRUD actions for Bitacoratiempos model.
  */
-class ProyectosController extends Controller
+class BitacoratiemposController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class ProyectosController extends Controller
     }
 
     /**
-     * Lists all Proyectos models.
+     * Lists all Bitacoratiempos models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ProyectosSearch();
+        $searchModel = new BitacoratiemposSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class ProyectosController extends Controller
     }
 
     /**
-     * Displays a single Proyectos model.
+     * Displays a single Bitacoratiempos model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,16 +58,16 @@ class ProyectosController extends Controller
     }
 
     /**
-     * Creates a new Proyectos model.
+     * Creates a new Bitacoratiempos model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Proyectos();
+        $model = new Bitacoratiempos();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-           // return $this->redirect(['view', 'id' => $model->idProyecto]);
+           // return $this->redirect(['view', 'id' => $model->idBitacoraTiempo]);
            return $this->redirect(['index']);
         }
 
@@ -77,7 +77,7 @@ class ProyectosController extends Controller
     }
 
     /**
-     * Updates an existing Proyectos model.
+     * Updates an existing Bitacoratiempos model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -88,7 +88,7 @@ class ProyectosController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //return $this->redirect(['view', 'id' => $model->idProyecto]);
+            //return $this->redirect(['view', 'id' => $model->idBitacoraTiempo]);
             return $this->redirect(['index']);
         }
 
@@ -98,7 +98,7 @@ class ProyectosController extends Controller
     }
 
     /**
-     * Deletes an existing Proyectos model.
+     * Deletes an existing Bitacoratiempos model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -112,15 +112,15 @@ class ProyectosController extends Controller
     }
 
     /**
-     * Finds the Proyectos model based on its primary key value.
+     * Finds the Bitacoratiempos model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Proyectos the loaded model
+     * @return Bitacoratiempos the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Proyectos::findOne($id)) !== null) {
+        if (($model = Bitacoratiempos::findOne($id)) !== null) {
             return $model;
         }
 
