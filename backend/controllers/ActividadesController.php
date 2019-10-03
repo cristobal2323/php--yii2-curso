@@ -8,6 +8,7 @@ use backend\models\search\ActividadesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * ActividadesController implements the CRUD actions for Actividades model.
@@ -20,6 +21,16 @@ class ActividadesController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'create', 'delete', 'update', 'create-con-proyecto', 'update-con-proyecto'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -65,6 +76,7 @@ class ActividadesController extends Controller
     public function actionCreate()
     {
         $model = new Actividades();
+        $bandera = true;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
           //return $this->redirect(['view', 'id' => $model->idActividad]);
@@ -73,7 +85,25 @@ class ActividadesController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'bandera' => $bandera,
         ]);
+    }
+
+    public function actionCreateConProyecto($idProyecto)
+    {
+        $model = new Actividades();
+        $model->idProyecto = $idProyecto;
+        $bandera = false;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect(['/proyectos/update?id=' . $idProyecto]);
+            return $this->redirect(['/proyectos/update', 'id' => $idProyecto]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+                'bandera' => $bandera,
+            ]);
+        }
     }
 
     /**
@@ -85,6 +115,7 @@ class ActividadesController extends Controller
      */
     public function actionUpdate($id)
     {
+        $bandera = true;
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -94,7 +125,23 @@ class ActividadesController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'bandera' => $bandera,
         ]);
+    }
+
+    public function actionUpdateConProyecto($id)
+    {
+        $bandera = false;
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['/proyectos/update', 'id' => $model->idProyecto]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+                'bandera' => $bandera,
+            ]);
+        }
     }
 
     /**

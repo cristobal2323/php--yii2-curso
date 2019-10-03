@@ -24,7 +24,13 @@ use \backend\models\Proyectos;
     <?php
         $proyectos = ArrayHelper::map(Proyectos::find()->where(['Activo' => 1])->orderBy('NombreProyecto')->all(), 'idProyecto', 'NombreProyecto');
      ?>
+    <?php
+        if ($bandera) {
+    ?>
      <?=  $form->field($model, 'idProyecto')->dropDownList($proyectos) ?>
+     <?php
+       }
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

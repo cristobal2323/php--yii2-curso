@@ -22,8 +22,6 @@ use \backend\models\Proyectos;
 
     <?= $form->field($model, 'Interrupcion')->textInput() ?>
 
-    <?= $form->field($model, 'Total')->textInput() ?>
-
     <?= $form->field($model, 'ActividadNoPlaneada')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'idActividadPlaneada')->textInput() ?>
@@ -34,8 +32,6 @@ use \backend\models\Proyectos;
      <?=  $form->field($model, 'idProyecto')->dropDownList($proyectos) ?>
 
     <?= $form->field($model, 'Artefacto')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'idUsuario')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
