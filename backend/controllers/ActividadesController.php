@@ -25,7 +25,7 @@ class ActividadesController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'create', 'delete', 'update', 'create-con-proyecto', 'update-con-proyecto'],
+                        'actions' => ['index', 'view', 'create', 'delete', 'update', 'create-con-proyecto', 'update-con-proyecto', 'delete-con-proyecto'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -156,6 +156,14 @@ class ActividadesController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionDeleteConProyecto($id)
+    {
+        $model = $this->findModel($id);
+        $idProyecto = $model->idProyecto;
+        $model->delete();
+        return $this->redirect(['/proyectos/update', 'id' => $idProyecto]);
     }
 
     /**
